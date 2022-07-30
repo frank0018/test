@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .countdown {
+      width: 280px;
+      height: 350px;
+      text-align: center;
+      line-height: 1;
+      color: #fff;
+      background-color: brown;
+      /* background-size: 240px; */
+      /* float: left; */
+      overflow: hidden;
+      margin: 50px auto;
+    }
+
+    .countdown .next {
+      font-size: 16px;
+      margin: 25px 0 14px;
+    }
+
+    .countdown .title {
+      font-size: 30px;
+    }
+
+    .countdown .tips {
+      margin-top: 20px;
+      font-size: 23px;
+    }
+
+    .countdown small {
+      font-size: 17px;
+    }
+
+    .countdown .clock {
+      text-align: center;
+      width: 270px;
+      margin: 18px 3px 18px 10px;
+      overflow: hidden;
+    }
+
+    .countdown .clock span,
+    .countdown .clock i {
+      display: block;
+      text-align: center;
+      line-height: 34px;
+      font-size: 23px;
+      float: left;
+    }
+
+    .countdown .clock span {
+      width: 34px;
+      height: 34px;
+      border-radius: 2px;
+      text-align: center;
+      background-color: #303430;
+    }
+
+    .countdown .clock i {
+      width: 30px;
+      font-style: normal;
+    }
+    #day{
+      width: 44px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="countdown">
+    <p class="next">今天是2021年8月28日</p>
+    <p class="title">距赵大静生日倒计时</p>
+    <p class="clock">
+      <span id="day">00</span>
+      <i>天</i>
+      <span id="hour">00</span>
+      <i>时</i>
+      <span id="minutes">00</span>
+      <i>分</i>
+      <span id="second">00</span>
+      <i>秒</i>
+    </p>
+    <p class="title">距米攀颖生日倒计时</p>
+    <p class="clock">
+      <span id="day2">00</span>
+      <i>天</i>
+      <span id="hour2">00</span>
+      <i>时</i>
+      <span id="minutes2">00</span>
+      <i>分</i>
+      <span id="second2">00</span>
+      <i>秒</i>
+    </p>
+    <p class="tips">
+      现在是18:30:00
+    </p>
+  </div>
+<script>
+      // 获取显示日期以及时间的元素标签
+      let datetxt = document.querySelector('.next')
+      let daytxt = document.querySelector('#day')
+      let hourtxt = document.querySelector('#hour')
+      let minutestxt = document.querySelector('#minutes')
+      let secondtxt = document.querySelector('#second')
+      let daytxt2 = document.querySelector('#day2')
+      let hourtxt2 = document.querySelector('#hour2')
+      let minutestxt2 = document.querySelector('#minutes2')
+      let secondtxt2 = document.querySelector('#second2')
+      let  timetxt = document.querySelector('.tips')
+      getTime()
+
+      setInterval(getTime,1000)
+
+      function getTime(){
+        
+        let shijian = new Date()
+        let year = shijian.getFullYear()
+        let mon = shijian.getMonth()+1
+        if(mon<10){
+          mon = '0' + mon
+        }
+        let day = shijian.getDate()
+        if(day<10){
+          day = '0' + day
+        }
+        let hour = shijian.getHours()
+        if(hour<10){
+          hour = '0' + hour
+        }
+        let min = shijian.getMinutes()
+        if(min<10){
+          min = '0' + min
+        }
+        let sec = shijian.getSeconds()
+        if(sec<10){
+          sec = '0' + sec
+        }
+        datetxt.innerHTML = `今天是${year}年${mon}月${day}日`
+        timetxt.innerHTML = `北京时间 ${hour}:${min}:${sec}`
+
+         // 获取下午6点的时间戳
+            let oldtime = +new Date('2022-9-21 00:00:00')
+            let oldtime2 = +new Date('2022-9-23 06:00:00')
+
+            // 获取当前时间时间戳
+            let newtime = Date.now()
+
+            // 计数时间戳直接差值 并转换称s
+            secs = (oldtime - newtime)/1000
+            secs2 = (oldtime2 - newtime)/1000
+        
+            // 根据秒数算时间
+            let miao = secs%60
+            
+            if(miao<10){
+              secondtxt.innerHTML = '0'+Math.ceil(miao) 
+            }else{
+              secondtxt.innerHTML = Math.ceil(miao) 
+            }
+            
+            let fen = parseInt(secs/60%60)
+            // let fen = parseInt(secs%3600/60)
+            fen = fen<10? '0' +fen:fen
+            minutestxt.innerHTML = fen
+
+            let shi = parseInt(secs/3600%24)
+            shi = shi<10?'0'+shi:shi
+            hourtxt.innerHTML = shi
+
+            let tian = parseInt(secs/3600/24)
+            tian = tian<10?'0'+tian:tian
+            daytxt.innerHTML = tian
+
+
+            // 根据秒数算时间
+            let miao2 = secs2%60
+            
+            if(miao2<10){
+              secondtxt2.innerHTML = '0'+Math.ceil(miao2) 
+            }else{
+              secondtxt2.innerHTML = Math.ceil(miao2) 
+            }
+            
+            let fen2 = parseInt(secs2/60%60)
+            // let fen = parseInt(secs%3600/60)
+            fen2 = fen2<10? '0' +fen2:fen2
+            minutestxt2.innerHTML = fen2
+
+            let shi2 = parseInt(secs2/3600%24)
+            shi2 = shi2<10?'0'+shi2:shi2
+            hourtxt2.innerHTML = shi2
+
+            let tian2 = parseInt(secs2/3600/24)
+            tian2 = tian2<10?'0'+tian2:tian2
+            daytxt2.innerHTML = tian2
+
+
+
+
+      }
+
+        // setInterval(function(){
+        //     // 获取下午6点的时间戳
+        //     let oldtime = +new Date('2022-12-23 17:33:00')
+
+        //     // 获取当前时间时间戳
+        //     let newtime = Date.now()
+
+        //     // 计数时间戳直接差值 并转换称s
+        //     secs = (oldtime - newtime)/1000
+
+        //     // 根据秒数算时间
+        //     let miao = secs%60
+        //     if(miao<10){
+        //       secondtxt.innerHTML = '0'+Math.ceil(miao) 
+        //     }else{
+        //       secondtxt.innerHTML = Math.ceil(miao) 
+        //     }
+            
+        //     let fen = parseInt(secs%3600/60)
+        //     fen = fen<10? '0' +fen:fen
+        //     minutestxt.innerHTML = fen
+
+        //     let shi = parseInt(secs/3600%24)
+        //     shi = shi<10?'0'+shi:shi
+        //     hourtxt.innerHTML = shi
+
+        //     let tian = parseInt(secs/3600/24)
+        //     tian = tian<10?'0'+tian:tian
+        //     daytxt.innerHTML = tian
+
+
+        // },1000)
+
+
+        
+
+      
+     
+
+
+</script>
+
+
+
+
+
+</body>
+
+</html>
